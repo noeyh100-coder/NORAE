@@ -2,7 +2,10 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+  <meta name="theme-color" content="#0f0f14">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
   <title>같이 듣기</title>
   <link rel="stylesheet" href="style.css">
 </head>
@@ -12,44 +15,70 @@
       <h1>🎧 같이 듣기</h1>
       <p>닉네임을 입력하고 입장하세요</p>
       <input id="nameInput" maxlength="20" placeholder="닉네임" required autocomplete="off">
-      <button type="submit">입장</button>
+      <button id="joinBtn" type="submit">입장</button>
     </form>
   </div>
 
-  <header>
-    <h1>🎧 같이 듣기</h1>
-    <div id="users" class="users"></div>
-  </header>
+  <div class="app">
+    <header>
+      <h1>🎧 같이 듣기</h1>
+      <div id="users" class="users scroll"></div>
+    </header>
 
-  <main>
-    <section class="stage">
-      <div class="player-wrap">
-        <div id="player"></div>
-        <div id="empty" class="empty">아직 재생 중인 곡이 없어요<br>유튜브 링크를 추천해보세요</div>
-      </div>
-      <div class="now">
-        <div class="now-text">
-          <div id="nowTitle" class="now-title">-</div>
-          <div id="nowMeta" class="now-meta"></div>
+    <main>
+      <section class="stage scroll">
+        <div id="playerWrap" class="player-wrap">
+          <div id="player"></div>
+          <div id="empty" class="empty">아직 재생 중인 곡이 없어요<br>유튜브 링크를 추천해보세요</div>
+          <div id="danmaku" class="danmaku"></div>
         </div>
-        <div class="controls">
-          <button id="prevBtn" title="이전 곡">⏮</button>
-          <button id="nextBtn" title="다음 곡">⏭</button>
+        <div class="now">
+          <div class="now-text">
+            <div id="nowTitle" class="now-title">-</div>
+            <div id="nowMeta" class="now-meta"></div>
+          </div>
+          <div class="controls">
+            <button id="prevBtn" title="이전 곡">⏮</button>
+            <button id="playBtn" title="재생/일시정지">▶</button>
+            <button id="nextBtn" title="다음 곡">⏭</button>
+            <button id="dmBtn" title="화면 채팅 켜기/끄기">💬</button>
+            <button id="fsBtn" title="채팅 포함 전체화면">⛶</button>
+          </div>
         </div>
-      </div>
-      <p id="nowNote" class="now-note"></p>
-    </section>
+        <p id="nowNote" class="now-note"></p>
+      </section>
 
-    <aside class="side">
-      <form id="addForm" class="add">
-        <input id="urlInput" placeholder="유튜브 링크 붙여넣기" required autocomplete="off">
-        <input id="noteInput" maxlength="200" placeholder="추천 한마디 (선택)" autocomplete="off">
-        <button type="submit">추천하기</button>
-      </form>
-      <h2>플레이리스트 <span id="count"></span></h2>
-      <ul id="queue" class="queue"></ul>
-    </aside>
-  </main>
+      <aside class="side">
+        <div class="tabs">
+          <button class="tab active" data-tab="chat">채팅 <span id="unread" class="badge"></span></button>
+          <button class="tab" data-tab="list">플레이리스트 <span id="count"></span></button>
+        </div>
+        <ul id="chatLog" class="panel chat-log scroll active" data-panel="chat"></ul>
+        <div class="panel scroll" data-panel="list">
+          <form id="searchForm" class="add">
+            <div class="search-row">
+              <input id="searchInput" type="search" placeholder="유튜브 영상 검색" required autocomplete="off" enterkeyhint="search">
+              <button id="searchBtn" type="submit">검색</button>
+            </div>
+            <input id="noteInput" maxlength="200" placeholder="추천 한마디 (선택)" autocomplete="off">
+          </form>
+          <div id="results" class="results" hidden>
+            <div class="results-head">
+              <h3>검색 결과</h3>
+              <button id="closeResults" type="button" title="닫기">✕</button>
+            </div>
+            <ul id="resultList" class="queue"></ul>
+          </div>
+          <h3 class="list-head">플레이리스트</h3>
+          <ul id="queue" class="queue"></ul>
+        </div>
+        <form id="chatForm" class="chat-form">
+          <input id="chatInput" maxlength="100" placeholder="채팅 입력 · 화면에 흘러가요" autocomplete="off" enterkeyhint="send">
+          <button type="submit">전송</button>
+        </form>
+      </aside>
+    </main>
+  </div>
 
   <div id="toast" class="toast"></div>
 
