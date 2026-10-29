@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>같이 듣기</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="join" class="overlay">
+    <form id="joinForm" class="join-card">
+      <h1>🎧 같이 듣기</h1>
+      <p>닉네임을 입력하고 입장하세요</p>
+      <input id="nameInput" maxlength="20" placeholder="닉네임" required autocomplete="off">
+      <button type="submit">입장</button>
+    </form>
+  </div>
+
+  <header>
+    <h1>🎧 같이 듣기</h1>
+    <div id="users" class="users"></div>
+  </header>
+
+  <main>
+    <section class="stage">
+      <div class="player-wrap">
+        <div id="player"></div>
+        <div id="empty" class="empty">아직 재생 중인 곡이 없어요<br>유튜브 링크를 추천해보세요</div>
+      </div>
+      <div class="now">
+        <div class="now-text">
+          <div id="nowTitle" class="now-title">-</div>
+          <div id="nowMeta" class="now-meta"></div>
+        </div>
+        <div class="controls">
+          <button id="prevBtn" title="이전 곡">⏮</button>
+          <button id="nextBtn" title="다음 곡">⏭</button>
+        </div>
+      </div>
+      <p id="nowNote" class="now-note"></p>
+    </section>
+
+    <aside class="side">
+      <form id="addForm" class="add">
+        <input id="urlInput" placeholder="유튜브 링크 붙여넣기" required autocomplete="off">
+        <input id="noteInput" maxlength="200" placeholder="추천 한마디 (선택)" autocomplete="off">
+        <button type="submit">추천하기</button>
+      </form>
+      <h2>플레이리스트 <span id="count"></span></h2>
+      <ul id="queue" class="queue"></ul>
+    </aside>
+  </main>
+
+  <div id="toast" class="toast"></div>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="app.js"></script>
+  <script src="https://www.youtube.com/iframe_api"></script>
+</body>
+</html>
